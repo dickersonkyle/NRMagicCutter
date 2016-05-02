@@ -8,13 +8,14 @@ import org.parabot.environment.scripts.framework.SleepCondition;
 import org.rev317.min.api.methods.Inventory;
 import org.rev317.min.api.methods.Players;
 import org.rev317.min.api.methods.SceneObjects;
+import org.rev317.min.api.methods.Skill;
 import org.rev317.min.api.wrappers.Item;
 import org.rev317.min.api.wrappers.SceneObject;
 import java.awt.*;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.net.URL;
-
+import java.text.DecimalFormat;
 /**
  * Created by KyleHD on 5/1/2016.
  */
@@ -24,7 +25,7 @@ import java.net.URL;
         author = "KyleHD",
         name = "NRMagicCutter",
         category = Category.WOODCUTTING,
-        version = 1.1,
+        version = 1.2,
         description = "A basic woodcutting script for Near Reality. It cuts Magic trees for XP and 150k for each log, then drops when full. Start at Magic Trees training teleport.",
         servers = {"Near Reality"})
 
@@ -33,6 +34,8 @@ public class Cutter extends Script implements LoopTask, Paintable{
     private final int [] TREE_IDS = {1306, 8396, 8397, 8398, 8399, 8400, 8401, 8402, 8403, 8404, 8405, 8406, 8407, 8408, 8409,};
     private final int [] LOG_IDS = {1513, 1514};
     public final Image img1 = getImage("http://i.imgur.com/hHvEWSU.png");
+    public long startTime;
+    public int XP = 0;
 
     public Image getImage(String url) { // Adds image.
         try {
@@ -45,6 +48,9 @@ public class Cutter extends Script implements LoopTask, Paintable{
     public void paint(Graphics g1) {
         Graphics2D g = (Graphics2D)g1;
         g.drawImage(img1, -1, 308, null);
+        g.setColor(Color.DARK_GRAY);
+        g.setFont(new Font("Verdana", Font.BOLD, 14));
+        g.drawString(runTime(startTime), 158, 381);
     }
 
     @Override
@@ -75,8 +81,24 @@ public class Cutter extends Script implements LoopTask, Paintable{
 
     @Override
     public boolean onExecute() {
+
+        startTime = System.currentTimeMillis();
+        XP = Skill.WOODCUTTING.getExperience();
+
         System.out.println("NRMagicCutter has started. Enjoy!"); // Script is starting.
         return true;
+    }
+
+    public static String runTime(long i) {
+        DecimalFormat nf = new DecimalFormat("00");
+        long millis = System.currentTimeMillis() - i;
+        long hours = millis / (1000 * 60 * 60);
+        millis -= hours * (1000 * 60 * 60);
+        long minutes = millis / (1000 * 60);
+        millis -= minutes * (1000 * 60);
+        long seconds = millis / 1000;
+        return nf.format(hours) + ":" + nf.format(minutes) + ":"
+                + nf.format(seconds);
     }
 
     @Override
