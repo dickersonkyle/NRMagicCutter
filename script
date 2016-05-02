@@ -37,6 +37,11 @@ public class Cutter extends Script implements LoopTask, Paintable{
     public long startTime;
     public int XP = 0;
 
+    public int getHourlyRate(int variable) {
+        return (int) (((double) (variable - 0) * 3600000D) / (double) (System
+                .currentTimeMillis() - startTime));
+    }
+
     public Image getImage(String url) { // Adds image.
         try {
             return ImageIO.read(new URL(url));
@@ -50,7 +55,7 @@ public class Cutter extends Script implements LoopTask, Paintable{
         g.drawImage(img1, -1, 308, null);
         g.setColor(Color.DARK_GRAY);
         g.setFont(new Font("Verdana", Font.BOLD, 14));
-        g.drawString(runTime(startTime), 158, 381);
+        g.drawString(runTime(startTime), 160, 388);
     }
 
     @Override
