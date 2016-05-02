@@ -1,3 +1,4 @@
+import org.parabot.environment.api.interfaces.Paintable;
 import org.parabot.environment.api.utils.Time;
 import org.parabot.environment.scripts.Category;
 import org.parabot.environment.scripts.Script;
@@ -27,7 +28,7 @@ import java.net.URL;
         description = "A basic woodcutting script for Near Reality. It cuts Magic trees for XP and 150k for each log, then drops when full. Start at Magic Trees training teleport.",
         servers = {"Near Reality"})
 
-public class Cutter extends Script implements LoopTask{
+public class Cutter extends Script implements LoopTask, Paintable{
 
     private final int [] TREE_IDS = {1306, 8396, 8397, 8398, 8399, 8400, 8401, 8402, 8403, 8404, 8405, 8406, 8407, 8408, 8409,};
     private final int [] LOG_IDS = {1513, 1514};
@@ -42,7 +43,7 @@ public class Cutter extends Script implements LoopTask{
 
     public final Image img1 = getImage("http://i.imgur.com/hHvEWSU.png");
 
-    public void onRepaint(Graphics g1) {
+    public void paint(Graphics g1) {
         Graphics2D g = (Graphics2D)g1;
         g.drawImage(img1, -1, 308, null);
     }
@@ -75,15 +76,14 @@ public class Cutter extends Script implements LoopTask{
 
     @Override
     public boolean onExecute() {
-
-        System.out.println("NRMagicCutter has started. Enjoy!"); // Code is starting.
+        System.out.println("NRMagicCutter has started. Enjoy!"); // Script is starting.
         return true;
     }
 
     @Override
     public void onFinish() {
-        System.out.println("NRMagicCutter has ended. Goodbye!");
-    } // Code is finished.
+        System.out.println("NRMagicCutter has ended. Goodbye!");  // Scrtipt is finished.
+    }
 
     private SceneObject tree(){
         for(SceneObject tree : SceneObjects.getNearest(TREE_IDS)){ //Tree Shtuff.
