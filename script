@@ -9,6 +9,10 @@ import org.rev317.min.api.methods.Players;
 import org.rev317.min.api.methods.SceneObjects;
 import org.rev317.min.api.wrappers.Item;
 import org.rev317.min.api.wrappers.SceneObject;
+import java.awt.*;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * Created by KyleHD on 5/1/2016.
@@ -19,7 +23,7 @@ import org.rev317.min.api.wrappers.SceneObject;
         author = "KyleHD",
         name = "NRMagicCutter",
         category = Category.WOODCUTTING,
-        version = 1.0,
+        version = 1.1,
         description = "A basic woodcutting script for Near Reality. It cuts Magic trees for XP and 150k for each log, then drops when full. Start at Magic Trees training teleport.",
         servers = {"Near Reality"})
 
@@ -28,8 +32,23 @@ public class Cutter extends Script implements LoopTask{
     private final int [] TREE_IDS = {1306, 8396, 8397, 8398, 8399, 8400, 8401, 8402, 8403, 8404, 8405, 8406, 8407, 8408, 8409,};
     private final int [] LOG_IDS = {1513, 1514};
 
+    public Image getImage(String url) { // Adds image.
+        try {
+            return ImageIO.read(new URL(url));
+        } catch(IOException e) {
+            return null;
+        }
+    }
+
+    public final Image img1 = getImage("http://i.imgur.com/hHvEWSU.png");
+
+    public void onRepaint(Graphics g1) {
+        Graphics2D g = (Graphics2D)g1;
+        g.drawImage(img1, -1, 308, null);
+    }
+
     @Override
-    public int loop() {
+    public int loop() { // Check for trees, check if inventory has space. If both are true, do option CHOP_DOWN on tree with TREE_IDS.
         SceneObject tree = tree();
         if(tree != null) {
             if(!Inventory.isFull()) {
@@ -43,7 +62,7 @@ public class Cutter extends Script implements LoopTask{
                     }, 3000);
                 }
             }else{
-                for(Item log : Inventory.getItems(LOG_IDS)){
+                for(Item log : Inventory.getItems(LOG_IDS)){ // Checks for inventory space. If no space, drop logs with LOG_IDS.
                     if(log != null){
                         log.drop();
                         Time.sleep(1000);
@@ -56,18 +75,18 @@ public class Cutter extends Script implements LoopTask{
 
     @Override
     public boolean onExecute() {
-        System.out.println("NRMagicCutter has started. Enjoy!");
+
+        System.out.println("NRMagicCutter has started. Enjoy!"); // Code is starting.
         return true;
     }
 
     @Override
     public void onFinish() {
         System.out.println("NRMagicCutter has ended. Goodbye!");
-    }
-
+    } // Code is finished.
 
     private SceneObject tree(){
-        for(SceneObject tree : SceneObjects.getNearest(TREE_IDS)){
+        for(SceneObject tree : SceneObjects.getNearest(TREE_IDS)){ //Tree Shtuff.
             if(tree !=null){
                 return tree;
             }
