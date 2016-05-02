@@ -35,7 +35,7 @@ public class Cutter extends Script implements LoopTask, Paintable{
 
     private final int [] TREE_IDS = {1306, 8396, 8397, 8398, 8399, 8400, 8401, 8402, 8403, 8404, 8405, 8406, 8407, 8408, 8409,};
     private final int [] LOG_IDS = {1513, 1514};
-    public final Image img1 = getImage("http://i.imgur.com/lqvEQS3.png");
+    public final Image img1 = getImage("http://i.imgur.com/TbdOWlj.png");
     public long startTime;
     public int XP = 0;
 
