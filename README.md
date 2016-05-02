@@ -1,5 +1,5 @@
 # NRMagicCutter
-# Version 1.1
+# Version 1.2
 
 A (very) basic Parabot wooductting script for the server Near Reality.
 
@@ -13,3 +13,4 @@ Will eventually add a graphic and other user-friendly features.
 #Changelog
   1.0 - Initial Release.
   1.1 - Added image overlay.
+  1.2 - Added time running, XP gained, and XP per hour.
