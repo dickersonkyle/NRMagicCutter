@@ -40,7 +40,7 @@ public class Cutter extends Script implements LoopTask{
                         public boolean isValid(){
                             return Players.getMyPlayer().getAnimation() != -1;
                         }
-                    }, 1000);
+                    }, 3000);
                 }
             }else{
                 for(Item log : Inventory.getItems(LOG_IDS)){
