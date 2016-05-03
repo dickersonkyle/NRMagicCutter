@@ -35,7 +35,6 @@ public class Cutter extends Script implements LoopTask, Paintable{
 
     private final int [] TREE_IDS = {1306, 8396, 8397, 8398, 8399, 8400, 8401, 8402, 8403, 8404, 8405, 8406, 8407, 8408, 8409,};
     private final int [] LOG_IDS = {1513, 1514};
-    public final Image img1 = getImage("http://i.imgur.com/TbdOWlj.png");
     public long startTime;
     public int XP = 0;
 
@@ -52,9 +51,11 @@ public class Cutter extends Script implements LoopTask, Paintable{
         }
     }
 
+    public final Image img1 = getImage("http://i.imgur.com/TbdOWlj.png");
+
     public void paint(Graphics g1) {
         Graphics2D g = (Graphics2D)g1;
-        g.drawImage(img1, -1, 308, null);
+        g.drawImage(img1, -1, 0, null);
         g.setColor(Color.DARK_GRAY);
         g.setFont(new Font("Verdana", Font.BOLD, 14));
         g.drawString(runTime(startTime), 160, 388);
@@ -62,7 +63,6 @@ public class Cutter extends Script implements LoopTask, Paintable{
                 - XP;
         g.setColor(Color.DARK_GRAY);
         g.setFont(new Font("Verdana", Font.BOLD, 14));
-        g.drawString(runTime(startTime), 630, 353);
         g.drawString((new StringBuilder("").append(XP2)).toString(), 404,
                 387);
         g.drawString((new StringBuilder("")).append(getHourlyRate(XP2))
