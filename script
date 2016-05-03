@@ -52,7 +52,7 @@ public class Cutter extends Script implements LoopTask, Paintable{
 
     public void paint(Graphics g1) {
         Graphics2D g = (Graphics2D)g1;
-        g.drawImage(img1, -1, 308, null);
+        g.drawImage(img1, -1, 0, null);
         g.setColor(Color.DARK_GRAY);
         g.setFont(new Font("Verdana", Font.BOLD, 14));
         g.drawString(runTime(startTime), 160, 388);
